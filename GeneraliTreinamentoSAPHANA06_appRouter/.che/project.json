@@ -1,0 +1,1 @@
+{"type":"approuter.nodejs","builders":{"default":"sap.nodejs","configs":{}},"runners":{"configs":{}},"attributes":{},"description":"GeneraliTreinamentoSAPHANA06_appRouter","mixinTypes":["mtamodule"]}
