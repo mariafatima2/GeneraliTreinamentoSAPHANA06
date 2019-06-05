@@ -21,6 +21,13 @@ modules:
    requires:
     - name: GeneraliTreinamentoSAPHANA06_html5_repo_host
 
+
+ - name: HANAModule06
+   type: hdb
+   path: HANAModule06
+   requires:
+    - name: hdi_HANAModule06
+
 resources:
  - name: GeneraliTreinamentoSAPHANA06_html5_repo_runtime
    parameters:
@@ -33,4 +40,13 @@ resources:
       service-plan: app-host
       service: html5-apps-repo
    type: org.cloudfoundry.managed-service
+
+
+ - name: hdi_HANAModule06
+   parameters:
+      config:
+         schema: HANAModule06
+   properties:
+      hdi-container-name: ${service-name}
+   type: com.sap.xs.hdi-container
 

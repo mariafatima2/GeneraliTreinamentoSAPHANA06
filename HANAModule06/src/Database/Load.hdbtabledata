@@ -1,0 +1,129 @@
+{
+	"format_version": 1,
+	"imports": [
+		{
+			"target_table": "GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.InsuranceType",
+			"source_data": {
+			    "data_type": "CSV",
+			    "file_name": "GeneraliTreinamentoSAPHANA06.HANAModule06.Database::InsuranceType.csv",
+			    "has_header": true,
+			    "dialect": "HANA",
+			    "type_config": {
+			      "delimiter": ";"
+			    }
+			},
+			"import_settings": {
+			    "import_columns": [
+			    	"Id",
+			    	"Description"
+			    ]
+			},
+			"column_mappings": {
+			    "Id": 1,
+			    "Description": 2
+			}
+		},
+		{
+			"target_table": "GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.InsuranceObject",
+			"source_data": {
+			    "data_type": "CSV",
+			    "file_name": "GeneraliTreinamentoSAPHANA06.HANAModule06.Database::InsuranceObject.csv",
+			    "has_header": true,
+			    "dialect": "HANA",
+			    "type_config": {
+			      "delimiter": ";"
+			    }
+			},
+			"import_settings": {
+			    "import_columns": [
+			    	"Description",
+			    	"Id",
+			    	"InsuranceTypeId.Id"
+			    ]
+			},
+			"column_mappings": {
+		    	"Description": 1,
+		    	"Id": 2,
+			    "InsuranceTypeId.Id": 3
+			}
+		},
+		{
+			"target_table": "GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.InsuranceCategory",
+			"source_data": {
+			    "data_type": "CSV",
+			    "file_name": "GeneraliTreinamentoSAPHANA06.HANAModule06.Database::InsuranceCategory.csv",
+			    "has_header": true,
+			    "dialect": "HANA",
+			    "type_config": {
+			      "delimiter": ";"
+			    }
+			},
+			"import_settings": {
+			    "import_columns": [
+			    	"Id",
+			    	"Description"
+			    ]
+			},
+			"column_mappings": {
+			    "Id": 1,
+			    "Description": 2
+			}
+		},
+		{
+			"target_table": "GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.Location",
+			"source_data": {
+			    "data_type": "CSV",
+			    "file_name": "GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Location.csv",
+			    "has_header": true,
+			    "dialect": "HANA",
+			    "type_config": {
+			      "delimiter": ";"
+			    }
+			},
+			"import_settings": {
+			    "import_columns": [
+			    	"Id",
+			    	"City",
+			    	"Latitude",
+			    	"Longitude"
+			    ]
+			},
+			"column_mappings": {
+			    "Id": 1,
+		    	"City": 2,
+		    	"Latitude": 3,
+		    	"Longitude": 4
+			}
+		},
+		{
+			"target_table": "GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.Data",
+			"source_data": {
+			    "data_type": "CSV",
+			    "file_name": "GeneraliTreinamentoSAPHANA06.HANAModule06.Database::InsuranceData.csv",
+			    "has_header": true,
+			    "dialect": "HANA",
+			    "type_config": {
+			      "delimiter": ";"
+			    }
+			},
+			"import_settings": {
+			    "import_columns": [
+			    	"InsuranceObjectId.Id",
+			        "InsuranceCategoryId.Id",
+			        "InsuranceAccountId.Id",
+			        "LocationId.Id",
+			        "Date",
+			        "Value" 
+			    ]
+			},
+			"column_mappings": {
+		    	"InsuranceObjectId.Id": 1,
+		        "InsuranceCategoryId.Id": 2,
+		        "InsuranceAccountId.Id": 3,
+		        "LocationId.Id": 4,
+		        "Date": 5,
+		        "Value": 6 
+			}
+		}
+	]
+}

@@ -1,0 +1,69 @@
+namespace GeneraliTreinamentoSAPHANA06.HANAModule06.Database;
+
+using GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Types as Types;
+
+context Insurance {
+    @Comment : 'Insurance Types'
+    /*@@layout{"layoutInfo":undefined}*/
+    entity InsuranceType {
+        key Id          : Types.BusinessKey;
+            Description : Types.Text;
+    }
+    technical configuration {
+        column store;
+    };
+
+    @Comment : 'Insurance Objects'
+    entity InsuranceObject {
+        key Id              : Types.BusinessKey;
+            InsuranceTypeId : association[*, 1..1] to InsuranceType { Id };
+            Description     : Types.Text;
+    }
+    technical configuration {
+        column store;
+    };
+
+    @Comment : 'Insurance Accounts'
+    entity InsuranceAccount {
+        key Id          : Types.BusinessKey;
+            Description : Types.Text;
+    }
+    technical configuration {
+        column store;
+    };
+
+    @Comment : 'InsuranceCategory'
+    entity InsuranceCategory {
+        key Id          : Types.BusinessKey;
+            Description : Types.Text;
+    }
+    technical configuration {
+        column store;
+    };
+
+    @Comment : 'Location'
+    /*@@layout{"layoutInfo":undefined}*/
+    entity Location {
+        key Id        : Types.BusinessKey;
+            City      : Types.BusinessKey;
+            Latitude  : String(10);
+            Longitude : String(10);
+    }
+    technical configuration {
+        column store;
+    };
+
+    @Comment : 'Insurance Data'
+    /*@@layout{"layoutInfo":undefined}*/
+    entity Data {
+        key InsuranceObjectId   : association[*, 1..1] to InsuranceObject { Id };
+        key InsuranceCategoryId : association[*, 1..1] to InsuranceCategory { Id };
+        key InsuranceAccountId  : association[*, 1..1] to InsuranceAccount { Id };
+        key LocationId          : association[*, 1..1] to Location { Id };
+        key Date                : String(6);
+            Value               : Types.QuantityT;
+    }
+    technical configuration {
+        column store;
+    };
+};
