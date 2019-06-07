@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="GeneraliTreinamentoSAPHANA06.HANAModule06.DataProvider::CV_Insurance" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="HOURLY" enforceSqlExecution="false">
+<descriptions defaultDescription=""/>
+<localVariables>
+  <variable id="P_Category">
+    <descriptions defaultDescription="P_Category"/>
+    <variableProperties datatype="NVARCHAR" length="10" scale="null" mandatory="true" defaultValue="">
+      <valueDomain type="AttributeValue">
+        <externalLikeStructureName>GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.InsuranceCategory</externalLikeStructureName>
+        <externalLikeElementName>Id</externalLikeElementName>
+      </valueDomain>
+      <selection multiLine="true" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings/>
+<dataSources>
+  <DataSource id="GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.Data">
+    <resourceUri>GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.Data</resourceUri>
+  </DataSource>
+  <DataSource id="GeneraliTreinamentoSAPHANA06.HANAModule06.DataProvider::CV_LOCATION">
+    <resourceUri>GeneraliTreinamentoSAPHANA06.HANAModule06.DataProvider::CV_LOCATION</resourceUri>
+  </DataSource>
+  <DataSource id="GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.InsuranceCategory">
+    <resourceUri>GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.InsuranceCategory</resourceUri>
+  </DataSource>
+  <DataSource id="GeneraliTreinamentoSAPHANA06.HANAModule06.DataProvider::CV_Object">
+    <resourceUri>GeneraliTreinamentoSAPHANA06.HANAModule06.DataProvider::CV_Object</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="InsuranceData" cardinality="CN_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="ObjectId"/>
+      <viewAttribute id="CategoryId"/>
+      <viewAttribute id="AccountId"/>
+      <viewAttribute id="LocationId"/>
+      <viewAttribute id="City"/>
+      <viewAttribute id="Latitude"/>
+      <viewAttribute id="Longitude"/>
+      <viewAttribute id="Date"/>
+      <viewAttribute id="Value" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.Data">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ObjectId" source="InsuranceObjectId.Id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CategoryId" source="InsuranceCategoryId.Id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="AccountId" source="InsuranceAccountId.Id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LocationId" source="LocationId.Id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Longitude" source="Value"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Date" source="Date"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Value" source="Value"/>
+    </input>
+    <input node="GeneraliTreinamentoSAPHANA06.HANAModule06.DataProvider::CV_LOCATION">
+      <mapping xsi:type="Calculation:AttributeMapping" target="City" source="City"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Latitude" source="Latitude"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LocationId" source="Id"/>
+    </input>
+    <joinAttribute name="LocationId"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Category" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="Id"/>
+      <viewAttribute id="Description"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.InsuranceCategory">
+      <mapping xsi:type="Calculation:AttributeMapping" target="Id" source="Id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Description" source="Description"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="InsuranceData_Category" cardinality="CN_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="ObjectId"/>
+      <viewAttribute id="CategoryId"/>
+      <viewAttribute id="AccountId"/>
+      <viewAttribute id="LocationId"/>
+      <viewAttribute id="City"/>
+      <viewAttribute id="Latitude"/>
+      <viewAttribute id="Longitude"/>
+      <viewAttribute id="Date"/>
+      <viewAttribute id="Value" aggregationType="sum"/>
+      <viewAttribute id="CategoryDescription"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="InsuranceData">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ObjectId" source="ObjectId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CategoryId" source="CategoryId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="AccountId" source="AccountId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LocationId" source="LocationId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="City" source="City"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Latitude" source="Latitude"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Longitude" source="Longitude"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Date" source="Date"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Value" source="Value"/>
+    </input>
+    <input node="Category">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CategoryDescription" source="Description"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CategoryId" source="Id"/>
+    </input>
+    <joinAttribute name="CategoryId"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="InsuranceData_Object" cardinality="CN_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="ObjectId"/>
+      <viewAttribute id="CategoryId"/>
+      <viewAttribute id="AccountId"/>
+      <viewAttribute id="LocationId"/>
+      <viewAttribute id="City"/>
+      <viewAttribute id="Latitude"/>
+      <viewAttribute id="Longitude"/>
+      <viewAttribute id="Date"/>
+      <viewAttribute id="Value" aggregationType="sum"/>
+      <viewAttribute id="CategoryDescription"/>
+      <viewAttribute id="TypeId"/>
+      <viewAttribute id="ObjectDescription"/>
+      <viewAttribute id="TypeDescription"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="InsuranceData_Category">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ObjectId" source="ObjectId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CategoryId" source="CategoryId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="AccountId" source="AccountId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LocationId" source="LocationId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="City" source="City"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Latitude" source="Latitude"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Longitude" source="Longitude"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Date" source="Date"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="Value" source="Value"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CategoryDescription" source="CategoryDescription"/>
+    </input>
+    <input node="GeneraliTreinamentoSAPHANA06.HANAModule06.DataProvider::CV_Object">
+      <mapping xsi:type="Calculation:AttributeMapping" target="TypeId" source="TypeId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ObjectDescription" source="ObjectDescription"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TypeDescription" source="TypeDescription"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ObjectId" source="ObjectId"/>
+    </input>
+    <joinAttribute name="ObjectId"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="InsuranceData_Object">
+  <attributes>
+    <attribute id="ObjectId" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ObjectId"/>
+      <keyMapping columnObjectName="InsuranceData_Object" columnName="ObjectId"/>
+    </attribute>
+    <attribute id="ObjectDescription" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ObjectDescription"/>
+      <keyMapping columnObjectName="InsuranceData_Object" columnName="ObjectDescription"/>
+    </attribute>
+    <attribute id="CategoryId" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CategoryId"/>
+      <localVariable>P_Category</localVariable>
+      <keyMapping columnObjectName="InsuranceData_Object" columnName="CategoryId"/>
+    </attribute>
+    <attribute id="CategoryDescription" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CategoryDescription"/>
+      <keyMapping columnObjectName="InsuranceData_Object" columnName="CategoryDescription"/>
+    </attribute>
+    <attribute id="TypeId" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TypeId"/>
+      <keyMapping columnObjectName="InsuranceData_Object" columnName="TypeId"/>
+    </attribute>
+    <attribute id="TypeDescription" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TypeDescription"/>
+      <keyMapping columnObjectName="InsuranceData_Object" columnName="TypeDescription"/>
+    </attribute>
+    <attribute id="AccountId" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="AccountId"/>
+      <keyMapping columnObjectName="InsuranceData_Object" columnName="AccountId"/>
+    </attribute>
+    <attribute id="LocationId" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LocationId"/>
+      <keyMapping columnObjectName="InsuranceData_Object" columnName="LocationId"/>
+    </attribute>
+    <attribute id="City" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="City"/>
+      <keyMapping columnObjectName="InsuranceData_Object" columnName="City"/>
+    </attribute>
+    <attribute id="Latitude" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Latitude"/>
+      <keyMapping columnObjectName="InsuranceData_Object" columnName="Latitude"/>
+    </attribute>
+    <attribute id="Longitude" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Longitude"/>
+      <keyMapping columnObjectName="InsuranceData_Object" columnName="Longitude"/>
+    </attribute>
+    <attribute id="Date" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Date"/>
+      <keyMapping columnObjectName="InsuranceData_Object" columnName="Date"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes>
+    <calculatedAttribute id="Year" order="14" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="4">
+        <formula>leftstr(&quot;Date&quot;, 4)</formula>
+      </keyCalculation>
+      </calculatedAttribute>
+  </calculatedAttributes>
+  <baseMeasures>
+    <measure id="Value" order="13" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Value"/>
+      <measureMapping columnObjectName="InsuranceData_Object" columnName="Value"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="33.67842128423058" y="112"/>
+    
+      <rectangleSize width="380"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="InsuranceData" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="496.9999976158142"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.Data" modelObjectNameSpace="InsuranceData" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="16" y="16"/>
+      <rectangleSize width="409.119140625"/>
+    </shape>
+    <shape modelObjectName="GeneraliTreinamentoSAPHANA06.HANAModule06.DataProvider::CV_LOCATION" modelObjectNameSpace="InsuranceData" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="367.119140625" y="-44"/>
+      <rectangleSize width="233.533203125"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Category" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302" y="496.9999976158142"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="InsuranceData_Category" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="-36.69830172273112" y="356.9999988079071"/>
+      <rectangleSize height="30" width="475"/>
+    </shape>
+    <shape modelObjectName="InsuranceData" modelObjectNameSpace="InsuranceData_Category" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="146.69921875"/>
+    </shape>
+    <shape modelObjectName="Category" modelObjectNameSpace="InsuranceData_Category" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="141.021484375"/>
+    </shape>
+    <shape expanded="true" modelObjectName="InsuranceData_Object" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="33.67842128423058" y="217"/>
+      <rectangleSize height="30" width="380"/>
+    </shape>
+    <shape modelObjectName="InsuranceData_Category" modelObjectNameSpace="InsuranceData_Object" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="GeneraliTreinamentoSAPHANA06.HANAModule06.DataProvider::CV_Object" modelObjectNameSpace="InsuranceData_Object" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="496.10546875"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

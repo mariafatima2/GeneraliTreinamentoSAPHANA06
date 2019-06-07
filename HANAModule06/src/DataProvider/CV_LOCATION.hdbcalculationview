@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="GeneraliTreinamentoSAPHANA06.HANAModule06.DataProvider::CV_LOCATION" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="HOURLY" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_LOCATION"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.Location">
+    <resourceUri>GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.Location</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+<logicalModel id="GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.Location">
+  <attributes>
+    <attribute id="Id" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Id"/>
+      <keyMapping columnObjectName="Insurance.Location" columnName="Id"/>
+    </attribute>
+    <attribute id="City" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="City"/>
+      <keyMapping columnObjectName="Insurance.Location" columnName="City"/>
+    </attribute>
+    <attribute id="Latitude" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Latitude"/>
+      <keyMapping columnObjectName="Insurance.Location" columnName="Latitude"/>
+    </attribute>
+    <attribute id="Longitude" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Longitude"/>
+      <keyMapping columnObjectName="Insurance.Location" columnName="Longitude"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

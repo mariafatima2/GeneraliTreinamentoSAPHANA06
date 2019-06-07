@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="GeneraliTreinamentoSAPHANA06.HANAModule06.DataProvider::CV_Object" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="HOURLY" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_Object"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.InsuranceObject">
+    <resourceUri>GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.InsuranceObject</resourceUri>
+  </DataSource>
+  <DataSource id="GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.InsuranceType">
+    <resourceUri>GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.InsuranceType</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="ObjectId"/>
+      <viewAttribute id="ObjectDescription"/>
+      <viewAttribute id="TypeId"/>
+      <viewAttribute id="TypeDescription"/>
+      <viewAttribute hidden="true" id="JOIN$InsuranceTypeId.Id$Id"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.InsuranceObject">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ObjectId" source="Id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ObjectDescription" source="Description"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$InsuranceTypeId.Id$Id" source="InsuranceTypeId.Id"/>
+    </input>
+    <input node="GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.InsuranceType">
+      <mapping xsi:type="Calculation:AttributeMapping" target="TypeId" source="Id"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TypeDescription" source="Description"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$InsuranceTypeId.Id$Id" source="Id"/>
+    </input>
+    <joinAttribute name="JOIN$InsuranceTypeId.Id$Id"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="ObjectId" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ObjectId"/>
+      <keyMapping columnObjectName="Join_1" columnName="ObjectId"/>
+    </attribute>
+    <attribute id="ObjectDescription" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ObjectDescription"/>
+      <keyMapping columnObjectName="Join_1" columnName="ObjectDescription"/>
+    </attribute>
+    <attribute id="TypeId" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TypeId"/>
+      <keyMapping columnObjectName="Join_1" columnName="TypeId"/>
+    </attribute>
+    <attribute id="TypeDescription" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TypeDescription"/>
+      <keyMapping columnObjectName="Join_1" columnName="TypeDescription"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="189"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.InsuranceObject" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="73" y="19"/>
+      <rectangleSize width="568.140625"/>
+    </shape>
+    <shape modelObjectName="GeneraliTreinamentoSAPHANA06.HANAModule06.Database::Insurance.InsuranceType" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="121" y="149"/>
+      <rectangleSize width="557.916015625"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
